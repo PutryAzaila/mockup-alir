@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Masuk - ALIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<style>
+body{min-height:100vh;min-height:100dvh;background:var(--bg)}
+.lg{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);min-height:100vh;min-height:100dvh}
+@media(max-width:960px){.lg{grid-template-columns:1fr}.lg .lg-side{display:none}}
+
+/* panel kiri: ilustrasi dan ringkasan */
+.lg-side{position:relative;overflow:hidden;color:#F5F7FA;padding:32px clamp(28px,4vw,64px) 100px;display:flex;flex-direction:column;background:radial-gradient(60% 55% at 85% 0%,rgba(255,106,61,.32),transparent 62%),radial-gradient(70% 60% at 0% 100%,rgba(86,156,235,.28),transparent 60%),linear-gradient(160deg,#0B1E33 0%,#10304F 100%)}
+.lg-rings{position:absolute;right:-12%;top:12%;width:min(70vw,640px);aspect-ratio:1;pointer-events:none}
+.lg-rings i{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,106,61,.35);animation:alirPing 4.8s ease-out infinite}
+.lg-rings i:nth-child(2){animation-delay:1.6s}.lg-rings i:nth-child(3){animation-delay:3.2s}
+.lg-rings b{position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(248,250,252,.14)}
+.lg-rings b:nth-of-type(2){inset:18%;border-color:rgba(86,156,235,.28)}
+.lg-rings b:nth-of-type(3){inset:36%;border-color:rgba(248,250,252,.12)}
+.lg-top{position:relative;z-index:2;display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.03em}
+.lg-top .logo{width:36px;height:36px;border-radius:50%;background:var(--coral);color:var(--navy);display:grid;place-items:center}
+.lg-mid{position:relative;z-index:2;margin:auto 0;padding-top:14px;max-width:560px;animation:lgUp .5s both}
+.lg-mid h1{font-size:clamp(34px,3.8vw,54px);line-height:1;letter-spacing:-.045em;margin:0 0 14px}
+.lg-mid h1 span{color:var(--coral)}
+.lg-mid p{color:#CBD5E1;font-size:16px;line-height:1.55;max-width:460px;margin:0 0 6px}
+.lg-feat{display:grid;gap:12px;margin:0 0 30px;padding:0;list-style:none}
+.lg-feat li{display:flex;gap:12px;align-items:center;font-weight:600;font-size:15px}
+.lg-feat i{width:34px;height:34px;border-radius:12px;background:rgba(255,106,61,.16);color:#FF8A63;display:grid;place-items:center;flex:none}
+.lg-feat [data-lucide]{width:17px;height:17px}
+.lg-chips{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:3}
+.lg-chip{padding:14px 18px;border-radius:20px;background:rgba(248,250,252,.07);border:1px solid rgba(248,250,252,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:eduBob 4.6s ease-in-out infinite}
+.lg-chip:nth-child(2){animation-duration:5.4s}.lg-chip:nth-child(3){animation-duration:3.9s}
+.lg-chip b{display:block;font-size:26px;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.lg-chip span{font-size:12px;color:#94A3B8;font-weight:700}
+
+/* panel kanan: formulir */
+.lg-form{display:grid;place-items:center;padding:32px clamp(20px,4vw,56px);position:relative}
+.lg-card{width:min(440px,100%);animation:lgUp .45s .05s both}
+@keyframes lgUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.lg-brand{display:none;align-items:center;gap:10px;font-weight:800;font-size:22px;margin-bottom:28px}
+.lg-brand .logo{width:36px;height:36px;border-radius:50%;background:var(--coral);color:var(--navy);display:grid;place-items:center}
+@media(max-width:960px){.lg-brand{display:flex}}
+.lg-card h2{font-size:34px;letter-spacing:-.035em;line-height:1.05}
+.lg-card .sub{color:var(--s-500);margin:8px 0 24px;font-size:15px}
+.fld{display:grid;gap:7px;margin-bottom:16px}
+.fld label{font-size:13px;font-weight:700;color:var(--s-600)}
+.fi{position:relative}
+.fi>[data-lucide]{position:absolute;left:16px;top:50%;margin-top:-9px;width:18px;height:18px;color:var(--s-400);pointer-events:none;transition:color .2s}
+.fi input{width:100%;height:54px;padding:0 48px 0 46px;border-radius:16px;border:1.5px solid var(--s-200);background:#fff;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
+.fi input:focus{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,106,61,.15)}
+.fi:focus-within>[data-lucide]{color:var(--coral-dark)}
+.fi input.err{border-color:var(--red)}
+.fi .eye{position:absolute;right:8px;top:50%;margin-top:-18px;width:36px;height:36px;border-radius:50%;color:var(--s-400);display:grid;place-items:center;transition:all .2s}
+.fi .eye:hover{background:var(--s-100);color:var(--navy)}
+.opt{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;margin:2px 0 18px}
+.opt label{display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:600;color:var(--s-600)}
+.opt input{width:17px;height:17px;accent-color:var(--coral)}
+.opt a{font-weight:700;color:var(--coral-dark)}
+.err-r{display:flex;gap:8px;align-items:center;color:var(--red-ink);font-size:13px;font-weight:700;margin-bottom:12px;min-height:18px}
+.go{display:flex;justify-content:space-between;align-items:center;width:100%;height:56px;padding:0 22px;border-radius:99px;background:var(--navy);color:#fff;font-weight:800;font-size:16px;transition:all .3s var(--ease)}
+.go:hover:not([disabled]){background:var(--coral);color:var(--navy);transform:scale(1.02)}
+.go[disabled]{opacity:.85}
+.go .arr{transition:transform .3s var(--ease)}.go:hover .arr{transform:translateX(5px)}
+.lg-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px;font-size:13.5px;color:var(--s-500)}
+.lg-foot a{font-weight:700;color:var(--coral-dark)}.lg-foot a.m{color:var(--s-500)}
+.hint{margin-top:20px;padding:12px 14px;border-radius:14px;background:var(--water-tint);color:var(--water-deep);font-size:12.5px;line-height:1.55;display:flex;gap:10px}
+.hint [data-lucide]{width:16px;height:16px;flex:none;margin-top:2px}
+
+/* panggung tengah: radar, ikon mengorbit, dan kartu notifikasi bergantian */
+.lg-stage{position:relative;height:296px;margin:0 0 18px}
+.orb-r{position:absolute;left:50%;top:50%;border-radius:50%;border:1px dashed rgba(248,250,252,.16);transform:translate(-50%,-50%);animation:alirSpin var(--t) linear infinite}
+.orb-r.r1{width:128px;height:128px;border-color:rgba(255,106,61,.4)}
+.orb-r.r2{width:216px;height:216px;border-color:rgba(86,156,235,.34)}
+.orb-r.r3{width:268px;height:268px}
+.orb-r .it{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;transform:rotate(var(--a)) translateY(calc(var(--rad) * -1)) rotate(calc(var(--a) * -1))}
+.orb-r .it b{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:rgba(248,250,252,.1);border:1px solid rgba(248,250,252,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#FFD3C2;box-shadow:0 10px 24px rgba(6,18,31,.35);animation:alirSpin var(--t) linear infinite reverse}
+.orb-r.r1 .it b{background:var(--coral);color:var(--navy);border-color:transparent}
+.orb-r.r2 .it b{color:#BBD9FA}
+.orb-r .it [data-lucide]{width:18px;height:18px}
+.core{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:var(--coral);color:var(--navy);display:grid;place-items:center;box-shadow:0 0 0 8px rgba(255,106,61,.18),0 18px 40px rgba(255,106,61,.4);z-index:2}
+.core [data-lucide]{width:26px;height:26px}
+.core .pg{position:absolute;inset:0;border-radius:50%;border:2px solid var(--coral);animation:alirPing 2.6s ease-out infinite}
+.core .pg+.pg{animation-delay:1.3s}
+.fc{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:18px;background:rgba(11,30,51,.72);border:1px solid rgba(248,250,252,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 32px rgba(6,18,31,.4);font-size:12px;color:#CBD5E1;white-space:nowrap;opacity:0;animation:fcCycle 9s ease-in-out infinite}
+.fc b{display:block;color:#fff;font-size:13px}
+.fc>i{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;flex:none;background:rgba(255,106,61,.2);color:#FF8A63}
+.fc>i [data-lucide],.fc>[data-lucide]{width:17px;height:17px}
+.fc1{left:0;top:6%}.fc2{right:0;top:44%;animation-delay:3s}.fc3{left:4%;bottom:2%;animation-delay:6s}
+.fc2>i{background:rgba(20,184,166,.2);color:#5EEAD4}.fc3>i{background:rgba(245,165,36,.2);color:#FBBF24}
+@keyframes fcCycle{0%,4%{opacity:0;transform:translateY(14px) scale(.96)}10%,32%{opacity:1;transform:none}38%,100%{opacity:0;transform:translateY(-8px)}}
+@media(max-height:760px){.lg-stage{height:268px}.orb-r.r3{width:250px;height:250px}.orb-r.r3 .it{--rad:125px}.orb-r.r2{width:190px;height:190px}.orb-r.r2 .it{--rad:95px}.orb-r.r1{width:112px;height:112px}.orb-r.r1 .it{--rad:56px}.lg-mid{padding-top:12px}}
+
+/* versi tenang: hanya inti radar + satu orbit */
+.lg-rings{display:none}
+.lg-stage{height:240px;margin:8px 0 10px}
+.orb-r.r2{border-color:rgba(248,250,252,.14)}
+.orb-r.r2 .it b{background:rgba(248,250,252,.08);color:#FFD3C2;box-shadow:none}
+.lg-chip{animation:none}
+@media(max-height:760px){.lg-stage{height:220px}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<body>
+<script>window.NProgress && NProgress.start();</script>
+<div class="lg">
+  <aside class="lg-side">
+    <div class="lg-rings"><i></i><i></i><i></i><b></b><b></b><b></b></div>
+    <a class="lg-top" href="index.html"><span class="logo"><i data-lucide="waves"></i></span>ALIR</a>
+    <div class="lg-mid">
+      <h1>Satu portal <span>tanggap banjir</span> Pekalongan.</h1>
+      <p>Verifikasi laporan, tugaskan relawan terdekat, dan pantau logistik serta donasi.</p>
+      <div class="lg-stage" aria-hidden="true">
+        <div class="orb-r r2" style="--t:40s;--rad:100px"><span class="it" style="--a:0deg"><b><i data-lucide="map-pin"></i></b></span><span class="it" style="--a:120deg"><b><i data-lucide="life-buoy"></i></b></span><span class="it" style="--a:240deg"><b><i data-lucide="package"></i></b></span></div>
+        <div class="core"><span class="pg"></span><span class="pg"></span><i data-lucide="waves"></i></div>
+      </div>
+      <div class="lg-chips">
+        <div class="lg-chip"><b data-count="6">0</b><span>titik aktif</span></div>
+        <div class="lg-chip"><b data-count="38">0</b><span>relawan siaga</span></div>
+        <div class="lg-chip"><b data-count="371" data-pre="Rp" data-suf=" jt">0</b><span>donasi tersalur</span></div>
+      </div>
+    </div>
+    <div data-hero-water="#F5F7FA" data-h="90px" style="z-index:1"></div>
+  </aside>
+
+  <main class="lg-form">
+    <form class="lg-card" id="f" novalidate>
+      <a class="lg-brand" href="index.html"><span class="logo"><i data-lucide="waves"></i></span>ALIR</a>
+      <h2>Selamat datang kembali</h2>
+      <p class="sub">Masuk untuk mengelola laporan, relawan, dan bantuan.</p>
+      <div class="fld"><label for="em">Email</label>
+        <div class="fi"><i data-lucide="mail"></i><input id="em" type="email" placeholder="nama@alir.id" autocomplete="username"></div></div>
+      <div class="fld"><label for="pw">Kata sandi</label>
+        <div class="fi"><i data-lucide="lock"></i><input id="pw" type="password" placeholder="Masukkan kata sandi" autocomplete="current-password"><button type="button" class="eye" id="eye" aria-label="Tampilkan sandi"><i data-lucide="eye"></i></button></div></div>
+      <div class="opt"><label><input type="checkbox" id="rem" checked>Ingat saya</label><a href="#" id="forgot">Lupa sandi?</a></div>
+      <div class="err-r" id="err"></div>
+      <button class="go" id="go" type="submit"><span id="gl">Masuk</span><i data-lucide="arrow-right" class="arr" id="gi"></i></button>
+      <div class="lg-foot"><span>Komunitas baru? <a href="#" id="reg">Daftar</a></span><a class="m" href="index.html">Kembali ke situs</a></div>
+      <div class="hint"><i data-lucide="info"></i><span>Prototipe: email berisi "admin" masuk ke Panel Admin, lainnya ke Portal Relawan. Kata sandi bebas. Di produksi, role ditentukan backend (RBAC).</span></div>
+    </form>
+  </main>
+</div>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+icons(); mountHeroWater(); $$('[data-count]').forEach(countUp);
+$('#eye').onclick = () => { const p = $('#pw'), show = p.type === 'password'; p.type = show ? 'text' : 'password'; $('#eye').innerHTML = `<i data-lucide="${show ? 'eye-off' : 'eye'}"></i>`; icons(); };
+$('#reg').onclick = e => { e.preventDefault(); toast('Pendaftaran komunitas dibuka di versi produksi'); };
+$('#forgot').onclick = e => { e.preventDefault(); toast('Tautan atur ulang dikirim (simulasi)'); };
+const bad = (msg, id) => { $('#err').innerHTML = `<i data-lucide="circle-alert" style="width:16px"></i>${msg}`; icons(); if (id) $('#' + id).classList.add('err'); };
+$('#f').onsubmit = e => {
+  e.preventDefault(); const em = $('#em').value.trim(), pw = $('#pw').value;
+  $('#err').textContent = ''; $('#em').classList.remove('err'); $('#pw').classList.remove('err');
+  if (!/^\S+@\S+\.\S+$/.test(em)) return bad('Masukkan email yang valid', 'em');
+  if (!pw) return bad('Kata sandi wajib diisi', 'pw');
+  const role = /admin/i.test(em) ? 'admin' : 'relawan';
+  $('#go').disabled = true; $('#gl').textContent = 'Memeriksa akun...'; $('#gi').outerHTML = '<i data-lucide="loader-circle" id="gi" style="animation:alirSpin .9s linear infinite"></i>'; icons(); NP.start();
+  Store.get().user = {email: em, role}; Store.save();
+  setTimeout(() => { location.href = role + '.html'; }, 700);
+};
+</script>
+</body>
+</html>

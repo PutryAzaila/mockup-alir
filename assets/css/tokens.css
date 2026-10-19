@@ -1,0 +1,18 @@
+:root{
+  --navy:#0B1E33; --navy-2:#12304F; --navy-3:#1B4670;
+  --coral:#FF6A3D; --coral-hover:#FF8A63; --coral-dark:#D2481E; --coral-ink:#9A2E10; --coral-tint:#FFEDE6;
+  --red:#E5484D; --red-ink:#B91C1C; --red-tint:#FDECEC;
+  --teal:#14B8A6; --teal-ink:#0E6B62; --teal-tint:#CCF3EE;
+  --amber:#F5A524; --amber-ink:#8A5A00; --amber-tint:#FFF3D6;
+  --water:#569CEB; --water-deep:#2F6FBF; --water-tint:#E6F0FC;
+  --bg:#F5F7FA; --surface:#fff;
+  --s-100:#F1F5F9; --s-200:#E2E8F0; --s-300:#CBD5E1; --s-400:#94A3B8; --s-500:#64748B; --s-600:#475569;
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-sm:12px; --r-md:20px; --r-lg:28px; --r-xl:36px; --r-pill:999px;
+  --sh-sm:0 1px 2px rgba(11,30,51,.06),0 2px 8px rgba(11,30,51,.05);
+  --sh-md:0 8px 24px rgba(11,30,51,.10);
+  --sh-lg:0 24px 60px rgba(11,30,51,.18);
+  --gutter:clamp(16px,4vw,40px);
+  --maxw:1240px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}

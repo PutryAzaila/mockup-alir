@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Donasi - ALIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/donasi.css?v=24">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<body>
+<script>window.NProgress && NProgress.start();</script>
+<div id="nav"></div>
+
+<header class="dn-hero">
+  <div class="dn-floats" aria-hidden="true">
+    <span class="fl f1"><i data-lucide="package-open"></i></span>
+    <span class="fl f2"><i data-lucide="heart-handshake"></i></span>
+    <span class="fl f3"><i data-lucide="wheat"></i></span>
+  </div>
+  <div class="dn-in">
+    <div class="dn-copy" style="animation:alirUp .7s both">
+      <span class="kicker" style="color:#FFB27A">WISHLIST DONASI</span>
+      <h1 class="dn-h1">Donasikan barang yang benar-benar dibutuhkan.</h1>
+      <div class="flow" id="flow"></div>
+    </div>
+    <aside class="dn-stat glass-d" style="animation:alirUp .7s .2s both">
+      <span class="sl">DANA DONASI</span>
+      <div class="sv"><b data-count="482.5" data-dec="1" data-pre="Rp" data-suf=" jt">0</b><small>masuk</small></div>
+      <div class="bar" style="background:rgba(248,250,252,.14);margin:12px 0 8px"><i style="width:77%;background:linear-gradient(90deg,#FFB27A,#FF6A3D)"></i></div>
+      <div class="row between small" style="color:#CBD5E1"><span>Tersalur Rp371,2 jt</span><b style="color:#FF8A63">77%</b></div>
+      <div class="sr"><span><b data-count="1284">0</b>donatur</span><span><b data-count="38">0</b>relawan</span><span><b data-count="6">0</b>kebutuhan</span></div>
+    </aside>
+  </div>
+  <div data-hero-water="#F5F7FA" data-h="120px"></div>
+</header>
+
+<div class="dn-main" data-reveal>
+  <div style="flex:3 1 640px;min-width:0">
+    <div class="cat-h">
+      <h2 style="font-size:24px;margin:0">Katalog kebutuhan posko</h2>
+      <a class="lk" href="index.html#transparansi"><i data-lucide="shield-check" style="color:var(--teal)"></i>Lihat jejak penyaluran</a>
+    </div>
+    <div class="row between wrapx" style="gap:12px;margin-bottom:20px">
+      <div class="chips" id="cats"></div>
+      <div class="seg" id="urg"><button class="on" data-u="all">Semua</button><button data-u="Kritis">Kritis</button><button data-u="Mendesak">Mendesak</button><button data-u="Normal">Normal</button></div>
+    </div>
+    <div class="cat-g" id="cat"></div>
+  </div>
+  <aside class="dn-side">
+    <div class="side-h"><h3 style="font-size:20px;margin:0">Donatur terbaru</h3><span class="live"><i></i>LIVE</span></div>
+    <div id="donors"></div>
+    <p class="xs muted" style="margin-top:14px">Donatur dapat memilih tampil sebagai Anonim.</p>
+  </aside>
+</div>
+
+<div id="foot"></div>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/donasi.js?v=24"></script>
+</body>
+</html>

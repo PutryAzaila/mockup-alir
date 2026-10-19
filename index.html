@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ALIR - Air naik, bantuan bergerak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/landing.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<body>
+<script>window.NProgress && NProgress.start();</script>
+<div id="nav"></div>
+
+<!-- HERO -->
+<header id="top" class="hero">
+  <canvas id="radar" class="hero-radar"></canvas>
+  <div class="hero-in">
+    <div class="siaga" style="animation:alirUp .6s both">
+      <span class="badge-s"><i class="live-dot"></i>SIAGA II</span>
+      <div class="tk-wrap"><div class="tk" id="ticker"></div></div>
+    </div>
+    <div class="hero-grid">
+      <div style="animation:alirUp .7s .1s both">
+        <h1 class="h1x">Air naik.<br><span class="c">Bantuan bergerak.</span></h1>
+        <p class="lead">Laporan warga, relawan, dan donasi dalam satu peta terverifikasi untuk Kota Pekalongan.</p>
+        <div class="row wrapx" style="gap:10px">
+          <button class="pill-btn coral" id="hero-lapor">Lapor Banjir<i data-lucide="arrow-right" class="arr"></i></button>
+          <a class="pill-btn line" href="donasi.html">Berdonasi<i data-lucide="hand-heart" class="arr"></i></a>
+        </div>
+      </div>
+      <div class="hero-card glass-d" style="animation:alirUp .7s .2s both">
+        <a class="wx" href="cuaca.html">
+          <i data-lucide="cloud-rain" class="bob"></i>
+          <span class="grow"><small>CUACA &amp; ROB &middot; BMKG</small><b>27&deg; <em>Hujan ringan</em></b></span>
+          <span style="text-align:right"><small>Pasang tertinggi</small><strong>1,06 m &middot; 18.40</strong></span>
+        </a>
+        <div class="feed-h">LAPORAN TERVERIFIKASI TERBARU</div>
+        <div id="feed"></div>
+      </div>
+    </div>
+    <div class="counters" id="counters"></div>
+  </div>
+  <div data-hero-water="#F5F7FA" data-h="190px"></div>
+</header>
+
+<!-- PETA -->
+<section id="peta" class="sec-w" style="padding-top:80px">
+  <div class="sec-top">
+    <div><span class="kicker">PETA BANJIR &middot; LANGSUNG</span><h2 class="h2x" style="max-width:760px">Titik banjir &amp; cakupan relawan.</h2></div>
+    <div class="row wrapx" style="gap:8px">
+      <button class="tgl on" id="tg-posko"><i data-lucide="tent"></i>Posko relawan</button>
+      <button class="tgl on" id="tg-zone"><i data-lucide="radius"></i>Zona cakupan</button>
+    </div>
+  </div>
+  <div class="mapbox">
+    <div id="map" class="mapcv"></div>
+    <aside class="mpanel">
+      <div class="mtabs" id="mtabs"></div>
+      <div class="mlist" id="mlist"></div>
+      <button class="mnew" id="mnew">Laporkan titik baru<i data-lucide="plus"></i></button>
+    </aside>
+    <div class="mfocus" id="mfocus" hidden></div>
+  </div>
+</section>
+
+<!-- WISHLIST -->
+<section class="sec-w" data-reveal>
+  <div class="sec-top">
+    <div><span class="kicker">WISHLIST DONASI</span><h2 class="h2x">Paling dibutuhkan hari ini.</h2></div>
+    <a class="btn-dark" href="donasi.html">Lihat semua kebutuhan<i data-lucide="arrow-right" class="arr"></i></a>
+  </div>
+  <div class="grid-auto" id="wish"></div>
+</section>
+
+<!-- TRANSPARANSI -->
+<section id="transparansi" class="sec-w">
+  <span class="kicker">TRANSPARANSI &middot; BARANG &rarr; LOKASI &rarr; DOKUMENTASI</span>
+  <h2 class="h2x" style="margin-bottom:28px;max-width:860px">Lacak setiap bantuan.</h2>
+  <div class="ledger">
+    <span class="chip-l"><small>Dana masuk</small><b data-count="482500000" data-pre="Rp">0</b></span>
+    <span class="chip-l"><small>Disalurkan</small><b data-count="371200000" data-pre="Rp">0</b></span>
+    <span class="chip-l teal"><small>Saldo siap belanja</small><b data-count="111300000" data-pre="Rp">0</b></span>
+  </div>
+  <div class="btabs" id="btabs"></div>
+  <div class="bdet" id="bdet"></div>
+</section>
+
+<!-- EDUKASI -->
+<section id="edukasi" class="sec-w" style="max-width:1360px">
+  <div class="sec-top">
+    <div><span class="kicker">EDUKASI MITIGASI</span><h2 class="h2x" style="max-width:760px">Belajar siaga sambil bermain.</h2></div>
+    <a class="btn-dark" href="edukasi.html">Buka pusat edukasi<i data-lucide="arrow-right" class="arr"></i></a>
+  </div>
+  <div class="bento">
+    <a class="bt big" href="edukasi.html#sim">
+      <span class="wv-b"><svg viewBox="0 0 2880 100" preserveAspectRatio="none"><path d="M0 50 Q 360 0 720 50 T 1440 50 T 2160 50 T 2880 50 V 100 H 0 Z" fill="rgba(86,156,235,.2)"/></svg></span>
+      <span class="k" style="color:#FF8A63">SIMULATOR</span>
+      <span style="position:relative"><b>Seberapa dalam itu berbahaya?</b><small>Geser ketinggian air 0&ndash;150 cm dan lihat dampaknya.</small></span>
+    </a>
+    <a class="bt coral" href="edukasi.html#fase"><i data-lucide="list-checks"></i><span><b>Pencegahan &amp; saat banjir</b><small>Panduan sebelum, saat, setelah.</small></span></a>
+    <a class="bt teal" href="edukasi.html#mitos"><i data-lucide="scale"></i><span><b>Mitos atau fakta?</b><small>Tebak 6 pernyataan soal banjir.</small></span></a>
+    <a class="bt sm" href="edukasi.html#bag"><span class="ci"><i data-lucide="backpack"></i></span><span><b>Checklist tas siaga</b><small>12 barang wajib</small></span></a>
+    <a class="bt sm" href="edukasi.html#fakta"><span class="ci"><i data-lucide="sparkles"></i></span><span><b>Fun facts rob Pekalongan</b><small>6 hal yang jarang diketahui</small></span></a>
+    <a class="bt sm" href="edukasi.html#kuis"><span class="ci"><i data-lucide="award"></i></span><span><b>Kuis siaga</b><small>5 soal &middot; dapatkan lencana</small></span></a>
+  </div>
+</section>
+
+<!-- DOKUMENTASI -->
+<section id="dokumentasi" class="sec-w" style="max-width:1360px">
+  <div class="sec-top">
+    <div><span class="kicker">DOKUMENTASI LAPANGAN</span><h2 class="h2x">Bukti aksi relawan</h2></div>
+    <span class="row small" style="gap:8px;font-weight:700;color:var(--teal-ink)"><i data-lucide="badge-check"></i>Bergeotag &amp; terhubung ke batch distribusi</span>
+  </div>
+  <div class="masonry" id="gallery"></div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak" class="sec-w" style="max-width:1360px">
+  <span class="kicker">KONTAK DARURAT</span>
+  <h2 class="h2x" style="margin-bottom:28px">Satu ketukan, langsung tersambung.</h2>
+  <div class="grid-ct" id="contacts"></div>
+</section>
+
+<!-- CTA -->
+<section class="cta-b" data-reveal>
+  <div class="cta-in">
+    <h2>Lihat genangan?<br>Laporkan dalam 60 detik.</h2>
+    <div class="col" style="align-items:flex-start;gap:18px">
+      <p>Pin lokasi, pilih tingkat keparahan, tambahkan foto. Kami kabari lewat WhatsApp begitu relawan ditugaskan.</p>
+      <button class="pill-btn navy" id="cta-lapor">Mulai lapor<i data-lucide="arrow-right" class="arr"></i></button>
+    </div>
+  </div>
+</section>
+
+<div id="foot"></div>
+
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/fx.js"></script>
+<script src="assets/js/landing.js"></script>
+</body>
+</html>

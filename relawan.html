@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal Relawan - ALIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/panel.css">
+<style>
+.stepper{display:flex;align-items:center;gap:0;margin:16px 0}
+.stepper .st{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative;font-size:12px;font-weight:700;color:var(--s-400)}
+.stepper .st i{width:30px;height:30px;border-radius:50%;background:var(--s-200);display:grid;place-items:center;font-style:normal;color:#fff;z-index:1;transition:.3s}
+.stepper .st::before{content:"";position:absolute;top:14px;left:-50%;width:100%;height:3px;background:var(--s-200)}
+.stepper .st:first-child::before{display:none}
+.stepper .st.on{color:var(--navy)}.stepper .st.on i{background:var(--coral)}.stepper .st.on::before{background:var(--coral)}
+.stepper .st.done i{background:var(--teal)}.stepper .st.done::before{background:var(--teal)}
+.stk{display:flex;flex-direction:column;gap:6px}
+.newb{animation:pulse 1.2s ease-in-out 3}
+.inv-bar{height:8px;width:120px;border-radius:9px;background:var(--s-100);overflow:hidden}.inv-bar i{display:block;height:100%;border-radius:9px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<body data-panel>
+<script>window.NProgress && NProgress.start();</script>
+<div class="shell">
+  <aside class="side" id="side">
+    <a class="brand" href="index.html" style="padding:0"><span class="logo"><i data-lucide="waves"></i></span><span>ALIR</span></a>
+    <div class="role-c"><span class="av">KS</span><span><b>Komunitas Sigap Pantura</b><em><i data-lucide="shield-check"></i>Role: Komunitas Relawan</em></span></div>
+    <a data-tab="beranda"><i data-lucide="house"></i>Beranda</a>
+    <a data-tab="tugas"><i data-lucide="clipboard-list"></i>Penugasan<span class="badge" id="b-tugas">0</span></a>
+    <a data-tab="inventaris"><i data-lucide="boxes"></i>Inventaris<span class="badge amber" id="b-inv">0</span></a>
+    <a data-tab="logistik"><i data-lucide="package"></i>Permintaan Logistik<span class="badge teal" id="b-log">0</span></a>
+    <a data-tab="wishlist"><i data-lucide="heart-handshake"></i>Wishlist Donasi</a>
+    <a data-tab="dok"><i data-lucide="camera"></i>Dokumentasi</a>
+    <a data-tab="profil"><i data-lucide="map-pin"></i>Profil &amp; Posko</a>
+    <div style="margin-top:auto;padding-top:20px"><a href="index.html"><i data-lucide="globe"></i>Lihat situs publik</a><a href="login.html"><i data-lucide="log-out"></i>Keluar</a></div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="btn btn-icon btn-ghost side-toggle" id="menu" aria-label="Menu"><i data-lucide="menu"></i></button>
+      <div><b id="tname">Komunitas Sigap Pantura</b><div class="xs muted">Role: Komunitas Relawan &middot; <span id="onduty">9</span> anggota bertugas</div></div>
+      <div class="row" style="margin-left:auto"><span class="tag teal hide-m"><i class="ping-dot" style="background:var(--teal);width:8px;height:8px"></i>Siaga</span></div>
+    </header>
+    <main class="content" id="view"></main>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/relawan.js"></script>
+</body>
+</html>

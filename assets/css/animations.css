@@ -1,0 +1,72 @@
+/* ===== Animasi: mengikuti file referensi (prefiks alir, cw, edu, ad, rl, lg) ===== */
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
+
+@keyframes alirUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes panelUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes alirFade{from{opacity:0}to{opacity:1}}
+@keyframes alirPing{0%{transform:scale(.7);opacity:.9}100%{transform:scale(2);opacity:0}}
+@keyframes alirPulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes alirSpin{to{transform:rotate(360deg)}}
+@keyframes alirTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes cwFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes eduBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes eduPop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes eduFill{from{width:0}to{width:100%}}
+@keyframes eduBurst{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(540deg);opacity:0}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+/* nama lama yang masih dipakai file CSS halaman */
+@keyframes waveSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ping{0%{transform:scale(.7);opacity:.9}100%{transform:scale(2);opacity:0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes fillGrow{from{width:0}to{width:100%}}
+@keyframes burst{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(540deg);opacity:0}}
+@keyframes slideL{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@keyframes dropIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+
+/* scroll reveal: satu pola seperti [data-reveal] di referensi */
+[data-reveal],.reveal,[data-anim]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--i,0)*70ms)}
+[data-reveal].in,.reveal.in,[data-anim].in{opacity:1;transform:none}
+
+/* air */
+.waves{position:absolute;left:0;right:0;bottom:-1px;height:clamp(60px,9vw,120px);overflow:hidden;pointer-events:none;line-height:0}
+.waves svg{position:absolute;bottom:0;left:0;width:200%;height:100%}
+.waves .w1{animation:alirTicker 14s linear infinite}
+.waves .w2{animation:alirTicker 22s linear infinite reverse;opacity:.7}
+.waves .w3{animation:alirTicker 32s linear infinite;opacity:.45}
+/* air naik di hero (referensi: height 2.8s, gelombang 18/11/7 dtk) */
+.hw{position:absolute;left:0;right:0;bottom:0;height:0;transition:height 2.8s var(--ease);pointer-events:none;z-index:0}
+.hw .l{position:absolute;left:0;right:0;overflow:hidden}
+.hw .l svg{position:absolute;left:0;bottom:0;width:200%}
+.hw .l1{top:-46px;height:50px}.hw .l1 svg{height:50px;animation:alirTicker 18s linear infinite}
+.hw .l2{top:-30px;height:34px}.hw .l2 svg{height:34px;animation:alirTicker 11s linear infinite reverse}
+.hw .body{position:absolute;inset:0;background:linear-gradient(180deg,rgba(86,156,235,.22),rgba(86,156,235,.08))}
+.hw .l3{bottom:-2px;height:60px}.hw .l3 svg{height:60px;animation:alirTicker 7s linear infinite}
+
+/* penanda dan titik hidup */
+.ping-dot{position:relative;display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red)}
+.ping-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:alirPing 1.8s ease-out infinite}
+.live-dot{animation:alirPulse 1.2s ease-in-out infinite}
+.bob{animation:cwFloat 4s ease-in-out infinite}
+.mk{position:relative;width:22px;height:22px}
+.mk i{position:absolute;inset:4px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.mk b{position:absolute;inset:0;border-radius:50%;opacity:.5;animation:alirPing 1.8s ease-out infinite}
+
+/* konfeti (hanya Edukasi: tas siaga penuh dan hasil kuis) */
+.pt{position:fixed;z-index:3500;width:9px;height:14px;border-radius:3px;pointer-events:none;animation:eduBurst var(--du,1.3s) cubic-bezier(.2,.8,.2,1) forwards}
+.pt.dot{width:9px;height:9px;border-radius:50%}
+
+/* foto abu-abu seperti referensi */
+.gs{filter:grayscale(1) contrast(1.08);transition:filter .6s var(--ease)}
+/* berwarna saat di-hover atau ditekan/disentuh */
+.gs:hover,.gs:active,a:hover .gs,a:active .gs,.w-card:hover .gs,.w-card:active .gs,.dc:hover .gs,.dc:active .gs,figure:hover .gs,figure:active .gs,.im:hover .gs,.im:active .gs,.bdet .pic:hover .gs,.bdet .pic:active .gs,.dcard:hover .gs{filter:none}
+
+/* panel Admin/Relawan: isi tab muncul (adUp/rlUp .35s) */
+#view>*{animation:panelUp .35s both}
+
+/* Catatan: seperti referensi, animasi tidak dimatikan oleh prefers-reduced-motion. */

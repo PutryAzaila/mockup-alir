@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel Admin - ALIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/panel.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+</head>
+<body data-panel>
+<script>window.NProgress && NProgress.start();</script>
+<div class="shell">
+  <aside class="side" id="side">
+    <a class="brand" href="index.html" style="padding:0"><span class="logo"><i data-lucide="waves"></i></span><span>ALIR</span></a>
+    <div class="role-c"><span class="av">AD</span><span><b>Admin</b><em><i data-lucide="shield-check"></i>Role: Admin</em></span></div>
+    <a data-tab="ringkasan"><i data-lucide="layout-dashboard"></i>Ringkasan</a>
+    <div class="ng" data-g="lap">
+      <button class="ng-h" aria-expanded="false"><i data-lucide="siren"></i><span>Laporan</span><b class="gb" id="g-lap">0</b><i data-lucide="chevron-down" class="chev"></i></button>
+      <div class="ng-b"><div>
+        <a data-tab="verifikasi"><i data-lucide="shield-check"></i>Verifikasi<span class="badge" id="b-ver">0</span></a>
+        <a data-tab="penugasan"><i data-lucide="route"></i>Penugasan<span class="badge amber" id="b-pen">0</span></a>
+      </div></div>
+    </div>
+    <div class="ng" data-g="ali">
+      <button class="ng-h" aria-expanded="false"><i data-lucide="hand-heart"></i><span>Aliran Bantuan</span><b class="gb" id="g-ali">0</b><i data-lucide="chevron-down" class="chev"></i></button>
+      <div class="ng-b"><div>
+        <a data-tab="logistik"><i data-lucide="package"></i>Logistik<span class="badge" id="b-log">0</span></a>
+        <a data-tab="donasi"><i data-lucide="wallet"></i>Donasi &amp; Alokasi</a>
+      </div></div>
+    </div>
+    <div class="ng" data-g="kon">
+      <button class="ng-h" aria-expanded="false"><i data-lucide="layers"></i><span>Konten &amp; Data</span><b class="gb" id="g-kon">0</b><i data-lucide="chevron-down" class="chev"></i></button>
+      <div class="ng-b"><div>
+        <a data-tab="dokumentasi"><i data-lucide="images"></i>Dokumentasi<span class="badge teal" id="b-doc">0</span></a>
+        <a data-tab="komunitas"><i data-lucide="users"></i>Komunitas<span class="badge" id="b-kom">0</span></a>
+        <a data-tab="edukasi"><i data-lucide="book-open"></i>Edukasi</a>
+        <a data-tab="wa"><i data-lucide="message-circle"></i>WhatsApp</a>
+      </div></div>
+    </div>
+    <div style="margin-top:auto;padding-top:20px"><a href="index.html"><i data-lucide="globe"></i>Lihat situs publik</a><a href="login.html"><i data-lucide="log-out"></i>Keluar</a></div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="btn btn-icon btn-ghost side-toggle" id="menu" aria-label="Menu"><i data-lucide="menu"></i></button>
+      <div class="search"><i data-lucide="search"></i><input class="input" placeholder="Cari laporan, relawan, donasi..." id="q"></div>
+      <div class="row" style="margin-left:auto">
+        <button class="btn btn-ghost btn-sm" data-exp="PDF"><i data-lucide="file-text"></i><span class="hide-m">Ekspor PDF</span></button>
+        <button class="btn btn-ghost btn-sm" data-exp="Excel"><i data-lucide="sheet"></i><span class="hide-m">Ekspor Excel</span></button>
+        <span class="tag navy hide-m" style="height:34px;padding:0 14px">Admin</span>
+      </div>
+    </header>
+    <main class="content" id="view"></main>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
